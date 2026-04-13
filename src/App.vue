@@ -3,7 +3,7 @@
 
 <template>
   <div class="app">
-    <h1>Vue Tasks</h1>
+    <h1>Current date {{ new Date().toLocaleDateString() }}</h1>
   </div>
 </template>
 

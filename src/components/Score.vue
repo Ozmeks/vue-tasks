@@ -7,10 +7,10 @@
   </div>
 </template>
 
-<script>
+<script setup>
 const { scoreNumber } = defineProps({
   scoreNumber: {
-    type: Number,
+    type: String,
     required: true
   },
 });
@@ -18,7 +18,7 @@ const { scoreNumber } = defineProps({
 
 <style scoped>
 .score {
-  background-color: var(--color-score-button);
+  background-color: var(--color-bg-light);
   font-family: 'Roboto', sans-serif;
   font-size: 16px;
   align-items: center;

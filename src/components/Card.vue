@@ -2,16 +2,16 @@
   <div class="card">
     <span class="badge badge-top card-text">01</span>
     <div class="card-content" @click="handleCardClick">
-      <div class="card-text">{{ word }}</div>
+      <div class="card-text">{{ data.word }}</div>
     </div>
     <span class="badge badge-bottom card-text">ПЕРЕВЕРНУТЬ</span>
   </div>
 </template>
 
 <script setup>
-const { word } = defineProps({
-  word: {
-    type: String,
+const { data } = defineProps({
+  data: {
+    type: Object,
     required: true
   }
 });

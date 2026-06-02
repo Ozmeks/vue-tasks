@@ -7,7 +7,7 @@
   </header>
   <div class="divider"></div>
   <div class="main-content">
-    <Button v-if="!isStarted" @click="startGame">Начать игру</Button>
+    <Button v-if="!isStarted" @click="startGame" :disabled="isLoading">Начать игру</Button>
     <div v-if ="isStarted" class="cards-container">
       <Card v-for="(cardData, index) in cards" :key="cardData.key" :data="cardData" />
     </div>
@@ -22,38 +22,36 @@ import { ref } from 'vue';
 
 let score = ref("100");
 let isStarted = ref(false);
+const isLoading = ref(false);
 
-const cards = ref([{
-  key: 1,
-  word: 'Aufschlag',
-  translation: 'Подача',
-  state: 'closed', // possible values: 'closed', 'open'
-  status: 'pending' // possible values: 'pending', 'success', 'fail'
-},
-{
-  key: 2,
-  word: 'Bagger',
-  translation: 'приём снизу',
-  state: 'open',
-  status: 'pending'
-},
-{
-  key: 3,
-  word: 'flach',
-  translation: 'низкий',
-  state: 'open',
-  status: 'success'
-},
-{
-  key: 4,
-  word: 'vorne',
-  translation: 'впереди',
-  state: 'open',
-  status: 'fail'
-}]);
+const cards = ref([]);
 
-function startGame() {
-  isStarted.value = true; 
+async function fetchCards() {
+  isLoading.value = true;
+  try {
+    const baseUrl = import.meta.env.VITE_API_BASE_URL;
+    const response = await fetch(`${baseUrl}/api/random-words`);
+    const data = await response.json();
+    cards.value = data.map((item, index) => ({
+      key: index + 1,
+      word: item.word,
+      translation: item.translation,
+      state: 'closed',
+      status: 'pending'
+    }));
+  console.log('Fetched cards:', cards.value);
+  }
+  catch (error) {
+    console.error('Error fetching cards:', error);
+  }
+  finally {
+    isLoading.value = false;
+  }
+}
+
+async function startGame() {
+  await fetchCards();
+  isStarted.value = true;
 }
 </script>
 

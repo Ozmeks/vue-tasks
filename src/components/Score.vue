@@ -10,7 +10,7 @@
 <script setup>
 const { scoreNumber } = defineProps({
   scoreNumber: {
-    type: String,
+    type: Number,
     required: true
   },
 });

@@ -19,5 +19,6 @@
   border-radius: 100px;
   width: 335px;
   height: 68px;
+  cursor: pointer;
 }
 </style>

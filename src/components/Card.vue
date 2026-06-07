@@ -12,7 +12,7 @@
     </svg>
 
     <span class="badge badge-top card-text">{{ data.key }}</span>
-    <div class="card-content" @click="handleCardClick">
+    <div class="card-content" @click="emit('flip-card')">
       <div class="card-text">
         <div v-if="data.state === 'closed'">{{ data.word }}</div>
         <div v-else>{{ data.translation }}</div>
@@ -31,10 +31,10 @@
       <span class="badge badge-bottom card-text">ЗАВЕРШЕНО</span>
     </div>
     <div v-else class="icon icon-bottom">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" @click="emit('mark-fail')">
         <use href="#fail-icon"/>
       </svg>
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" @click="emit('mark-success')">
         <use href="#success-icon"/>
       </svg>
     </div>
@@ -50,12 +50,8 @@ const { data } = defineProps({
     required: true
   }
 });
-const emit = defineEmits(["change-status", "flip-card"]);
+const emit = defineEmits(["flip-card", "mark-success", "mark-fail"]);
 
-function handleCardClick() {
-  emit("change-status");
-  emit("flip-card");
-}
 </script>
 
 <style scoped>

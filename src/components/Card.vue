@@ -63,12 +63,14 @@ const emit = defineEmits(["flip-card", "mark-success", "mark-fail"]);
 }
 .card-content {
   width: 100%;
+  max-width: 250px;
   height: 100%;
   border-radius: 12px;
   border: 1px solid var(--color-bg-light);
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: 0 auto;
 }
 .card-text {
   font-family: 'Roboto', sans-serif;

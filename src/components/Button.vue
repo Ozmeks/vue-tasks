@@ -1,10 +1,16 @@
 <template>
-  <div class="button">
+  <button class="button" :disabled="disabled">
     <slot></slot>
-  </div>
+  </button>
 </template>
 
 <script setup>
+defineProps({
+  disabled: {
+    type: Boolean,
+    default: false
+  }
+})
 </script>
 
 <style scoped>
@@ -20,5 +26,9 @@
   width: 335px;
   height: 68px;
   cursor: pointer;
+  border: none;
+}
+.button:disabled {
+  opacity: 0.6;
 }
 </style>
